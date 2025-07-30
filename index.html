@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اسأل هناده - مساعدك الذكي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Almarai:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Cairo', sans-serif; 
+        }
+        .font-title {
+            font-family: 'Almarai', sans-serif;
+        }
+        .bg-brand-beige { background-color: #F9F7F3; }
+        .bg-brand-green { background-color: #4A5C43; }
+        .text-brand-green { color: #4A5C43; }
+        .text-brand-dark { color: #333333; }
+        .chat-bubble-user {
+            background-color: #4A5C43;
+            color: white;
+            border-radius: 1.5rem 1.5rem 0.25rem 1.5rem;
+        }
+        .chat-bubble-ai {
+            background-color: #E5E7EB;
+            color: #333333;
+            border-radius: 1.5rem 1.5rem 1.5rem 0.25rem;
+        }
+        #chat-window::-webkit-scrollbar {
+            width: 6px;
+        }
+        #chat-window::-webkit-scrollbar-thumb {
+            background-color: #A9A9A9;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-brand-beige text-brand-dark flex flex-col min-h-screen">
+
+    <main class="max-w-2xl mx-auto py-10 px-4 flex-grow w-full">
+        <section class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-brand-green font-title">اسأل هناده</h1>
+            <p class="mt-3 text-lg text-gray-700">مساعدك الذكي للإجابة على كل أسئلتك حول منتجات دكسن والعمل معها.</p>
+        </section>
+
+        <!-- Back Button -->
+        <section class="text-center mb-8">
+             <a href="https://morad1971.github.io/HANADA-DXN/" class="inline-block px-6 py-2 bg-gray-200 text-gray-800 font-semibold rounded-lg hover:bg-gray-300 transition duration-300 shadow-sm">
+                &larr; العودة إلى التطبيق الرئيسي
+            </a>
+        </section>
+
+        <div class="bg-white rounded-lg shadow-lg flex flex-col h-[70vh]">
+            <!-- Chat Window -->
+            <div id="chat-window" class="flex-grow p-6 space-y-4 overflow-y-auto">
+                <div class="flex justify-start">
+                    <div class="chat-bubble-ai p-4 max-w-lg">
+                        <p>أهلاً فيكي! أنا هناده، مساعدتك الذكية. كيف بقدر أساعدك اليوم؟ اسأليني أي إشي عن المنتجات أو الشغل.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example Questions -->
+            <div class="p-4 border-t">
+                <p class="text-sm text-center text-gray-500 mb-2">جربي تسأليني واحد من هاي الأسئلة:</p>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <button class="example-q bg-gray-100 text-xs px-3 py-1 rounded-full hover:bg-gray-200">شو فوائد فطر عرف الأسد؟</button>
+                    <button class="example-q bg-gray-100 text-xs px-3 py-1 rounded-full hover:bg-gray-200">كم سعر معجون جانوزي؟</button>
+                    <button class="example-q bg-gray-100 text-xs px-3 py-1 rounded-full hover:bg-gray-200">بدي منتج يساعدني على التركيز</button>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-4 bg-gray-50 border-t rounded-b-lg">
+                <div class="flex items-center space-x-2 space-x-reverse">
+                    <input type="text" id="user-input" placeholder="اكتبي سؤالك هون..." class="flex-grow w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-green">
+                    <button id="send-btn" class="bg-brand-green text-white font-bold px-5 py-2 rounded-full hover:bg-opacity-90 transition">
+                        إرسال
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <section class="text-center mt-12 py-8">
+            <h2 class="text-2xl font-bold text-brand-dark font-title">هل أنتِ جاهزة للخطوة التالية؟</h2>
+            <p class="mt-3 text-lg text-gray-700 max-w-lg mx-auto">إذا كان عندك أي استفسار شخصي أو حابة تنضمي لفريقي ونبدأ رحلة النجاح سوا، أنا بانتظارك!</p>
+            <div class="mt-6">
+                <a href="https://wa.me/YOUR_WHATSAPP_NUMBER" target="_blank" class="inline-block bg-green-500 text-white font-bold text-lg px-8 py-3 rounded-full shadow-lg hover:bg-green-600 transition duration-300">
+                    تواصلي معي الآن عبر الواتساب
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-4 bg-gray-800 text-white">
+        <p class="text-sm">&copy; 2025 - دليل هناده دكسن.</p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const chatWindow = document.getElementById('chat-window');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        const exampleBtns = document.querySelectorAll('.example-q');
+
+        const productData = [
+            {"Product Code": "FB301", "name": "شاي لاتيه لينجزي", "category": "أغذية ومشروبات", "PV": 12.0, "DP": 13.6, "benefits": "نكهة غنية ومميزة, يحتوي على مستخلص فطر الجانوديرما, يعزز الطاقة والحيوية"},
+            {"Product Code": "FB002", "name": "قهوة لينجزي 3 في 1", "category": "أغذية ومشروبات", "PV": 10.0, "DP": 10.2, "benefits": "خالي من الألوان والنكهات الصناعية, يعزز النشاط والحيوية, يقوي الجهاز المناعي"},
+            {"Product Code": "FB005", "name": "عصير روسيل", "category": "أغذية ومشروبات", "PV": 12.0, "DP": 9.25, "benefits": "غني بفيتامين C ومضادات الأكسدة, يدعم صحة القلب والدورة الدموية, يحسن الهضم"},
+            {"Product Code": "FB007", "name": "مورينزي", "category": "أغذية ومشروبات", "PV": 17.0, "DP": 13.25, "benefits": "يوازن درجة الحموضة بالجسم, يساعد على إزالة السموم, ينشط الدورة الدموية, يحسن الهضم"},
+            {"Product Code": "FB025", "name": "كوكوزي", "category": "أغذية ومشروبات", "PV": 13.0, "DP": 13.6, "benefits": "يعزز الطاقة والتركيز, يدعم صحة القلب, يساعد في نمو الدماغ عند الأطفال"},
+            {"Product Code": "FB032", "name": "سيريال سبيرولينا", "category": "أغذية ومشروبات", "PV": 30.0, "DP": 28.0, "benefits": "غني بالبروتين والفيتامينات والمعادن, يعزز المناعة, يساعد في تنظيم الوزن"},
+            {"Product Code": "HF029", "name": "أقراص عرف الأسد", "category": "المكملات الغذائية الصحية", "PV": 26.0, "DP": 24.1, "benefits": "دعم صحة الدماغ والجهاز العصبي, تحسين الذاكرة والتركيز, دعم الجهاز الهضمي"},
+            {"Product Code": "HF030", "name": "أقراص كورديسيبس", "category": "المكملات الغذائية الصحية", "PV": 60.0, "DP": 54.95, "benefits": "زيادة الطاقة والأداء الرياضي, دعم صحة الجهاز التنفسي, دعم وظائف الكلى والكبد"},
+            {"Product Code": "HF031", "name": "أقراص سبيرولينا (120)", "category": "المكملات الغذائية الصحية", "PV": 20.0, "DP": 16.35, "benefits": "غذاء متكامل (بروتين, فيتامينات, معادن), مضاد للأكسدة, دعم صحة الدم والقلب"},
+            {"Product Code": "HF038", "name": "أقراص سبيرولينا (500)", "category": "المكملات الغذائية الصحية", "PV": 70.0, "DP": 56.85, "benefits": "غذاء متكامل (بروتين, فيتامينات, معادن), مضاد للأكسدة, دعم صحة الدم والقلب"},
+            {"Product Code": "HF039", "name": "مايكوفيجي", "category": "المكملات الغذائية الصحية", "PV": 70.0, "DP": 51.65, "benefits": "تنظيف الجهاز الهضمي والقولون, إدارة الوزن, إزالة السموم من الجسم, مصدر غني بالألياف"},
+            {"Product Code": "HF041", "name": "مسحوق فطر الريشي", "category": "المكملات الغذائية الصحية", "PV": 70.0, "DP": 53.7, "benefits": "دعم وتقوية جهاز المناعة, التخفيف من التوتر وتحسين النوم, إزالة السموم ودعم صحة الكبد"},
+            {"Product Code": "PC004", "name": "شامبو جانوزي", "category": "العناية الشخصية", "PV": 11.0, "DP": 7.8, "benefits": "ينظف الشعر بلطف ويغذيه بفضل خلاصة الجانوديرما وفيتامين B5"},
+            {"Product Code": "PC006", "name": "معجون أسنان جانوزي", "category": "العناية الشخصية", "PV": 6.0, "DP": 5.85, "benefits": "طبيعي بخلاصة الجانوديرما، بدون فلورايد. ينظف الأسنان واللثة"},
+            {"Product Code": "PC036", "name": "صابون جانوزي", "category": "العناية الشخصية", "PV": 3.0, "DP": 2.7, "benefits": "ينظف البشرة بلطف ويحافظ على رطوبتها"},
+            {"Product Code": "SC014", "name": "كريم شجرة الشاي", "category": "العناية بالبشرة ومستحضرات التجميل", "PV": 6.0, "DP": 5.85, "benefits": "مهدئ ومطهر للبشرة بفضل زيت شجرة الشاي"}
+        ];
+        
+        const productDataString = JSON.stringify(productData);
+
+        const sendMessage = async () => {
+            const userText = userInput.value.trim();
+            if (userText === "") return;
+
+            appendMessage(userText, 'user');
+            userInput.value = "";
+            showTypingIndicator();
+
+            const prompt = `
+                أنتِ "هناده"، خبيرة بمنتجات DXN في الأردن. مهمتك هي الإجابة على أسئلة المستخدمين بلهجة أردنية ودودة ومبسطة. استخدمي المعلومات التالية عن المنتجات للإجابة بدقة. إذا سأل المستخدم عن منتج غير موجود، أو عن موضوع خارج نطاق دكسن، اعتذري بلطف وقولي أن معلوماتك تقتصر على منتجات دكسن.
+                
+                معلومات المنتجات:
+                ${productDataString}
+
+                سؤال المستخدم: "${userText}"
+            `;
+            
+            try {
+                const response = await callGemini(prompt);
+                removeTypingIndicator();
+                appendMessage(response, 'ai');
+            } catch (error) {
+                removeTypingIndicator();
+                appendMessage('عفواً، حدث خطأ ما. الرجاء المحاولة مرة أخرى.', 'ai');
+                console.error("Error calling Gemini API:", error);
+            }
+        };
+
+        const callGemini = async (prompt) => {
+            const apiKey = ""; // Provided by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            
+            const payload = {
+                contents: [{
+                    parts: [{ text: prompt }]
+                }]
+            };
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error(`API call failed with status: ${response.status}`);
+            }
+
+            const result = await response.json();
+             if (result.candidates && result.candidates.length > 0 &&
+                result.candidates[0].content && result.candidates[0].content.parts &&
+                result.candidates[0].content.parts.length > 0) {
+                return result.candidates[0].content.parts[0].text;
+            } else {
+                return "عفواً، لم أتمكن من فهم طلبك. هل يمكنكِ إعادة صياغة السؤال؟";
+            }
+        };
+
+        const appendMessage = (text, sender) => {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+            
+            const bubble = document.createElement('div');
+            bubble.className = `p-4 max-w-lg ${sender === 'user' ? 'chat-bubble-user' : 'chat-bubble-ai'}`;
+            bubble.innerHTML = `<p>${text}</p>`;
+
+            messageDiv.appendChild(bubble);
+            chatWindow.appendChild(messageDiv);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        };
+
+        const showTypingIndicator = () => {
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typing-indicator';
+            typingDiv.className = 'flex justify-start';
+            typingDiv.innerHTML = `
+                <div class="chat-bubble-ai p-4 max-w-lg">
+                    <div class="flex items-center space-x-1 space-x-reverse">
+                        <div class="w-2 h-2 bg-gray-500 rounded-full animate-pulse"></div>
+                        <div class="w-2 h-2 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+                        <div class="w-2 h-2 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+                    </div>
+                </div>
+            `;
+            chatWindow.appendChild(typingDiv);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        };
+
+        const removeTypingIndicator = () => {
+            const indicator = document.getElementById('typing-indicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        };
+
+        sendBtn.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        exampleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                userInput.value = btn.textContent;
+                sendMessage();
+            });
+        });
+    });
+    </script>
+</body>
+</html>
