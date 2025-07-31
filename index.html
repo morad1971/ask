@@ -58,18 +58,20 @@
             <div id="chat-window" class="flex-grow p-6 space-y-4 overflow-y-auto">
                 <div class="flex justify-start">
                     <div class="chat-bubble-ai p-4 max-w-lg">
-                        <p>أهلاً فيكي! أنا هناده، مساعدتك الذكية. كيف بقدر أساعدك اليوم؟ اسأليني أي إشي عن المنتجات أو الشغل.</p>
+                        <p>أهلاً فيكي! أنا هناده، مساعدتك الذكية. كيف بقدر أساعدك اليوم؟ اسأليني أي إشي، أو اختاري من الأسئلة الشائعة تحت.</p>
                     </div>
                 </div>
             </div>
 
             <!-- Example Questions -->
             <div class="p-4 border-t">
-                <p class="text-sm text-center text-gray-500 mb-2">جربي تسأليني واحد من هاي الأسئلة:</p>
+                <p class="text-sm text-center text-gray-500 mb-2">أسئلة شائعة (جربي تسأليني):</p>
                 <div class="flex flex-wrap gap-2 justify-center">
-                    <button class="example-q bg-gray-100 text-xs px-3 py-1 rounded-full hover:bg-gray-200">شو فوائد فطر عرف الأسد؟</button>
-                    <button class="example-q bg-gray-100 text-xs px-3 py-1 rounded-full hover:bg-gray-200">كم سعر معجون جانوزي؟</button>
-                    <button class="example-q bg-gray-100 text-xs px-3 py-1 rounded-full hover:bg-gray-200">بدي منتج يساعدني على التركيز</button>
+                    <button class="example-q bg-gray-100 text-xs px-3 py-1 rounded-full hover:bg-gray-200">هل منتجات دكسن غالية؟</button>
+                    <button class="example-q bg-gray-100 text-xs px-3 py-1 rounded-full hover:bg-gray-200">هل أنا مجبورة أبيع المنتجات؟</button>
+                    <button class="example-q bg-gray-100 text-xs px-3 py-1 rounded-full hover:bg-gray-200">هل هاد الشغل تسويق شبكي؟</button>
+                    <button class="example-q bg-gray-100 text-xs px-3 py-1 rounded-full hover:bg-gray-200">ما عندي معارف كتير، كيف أنجح؟</button>
+                    <button class="example-q bg-gray-100 text-xs px-3 py-1 rounded-full hover:bg-gray-200">أنا ما بعرف أحكي وأقنع الناس!</button>
                 </div>
             </div>
 
@@ -108,36 +110,26 @@
         const sendBtn = document.getElementById('send-btn');
         const exampleBtns = document.querySelectorAll('.example-q');
 
-        // --- المفتاح السري ---
-        // الرجاء استبدال النص التالي بمفتاح API الخاص بك الذي حصلت عليه من Google AI Studio
-        const apiKey = "AIzaSyAYVLelw8QpT17_53G1JIBXbKfG6LAIV9c"; // <--- غيّر هذا السطر
+        const apiKey = "AIzaSyAYVLelw8QpT17_53G1JIBXbKfG6LAIV9c";
 
         const productData = [
-            {"Product Code": "FB301", "name": "شاي لاتيه لينجزي", "category": "أغذية ومشروبات", "PV": 12.0, "DP": 13.6, "benefits": "نكهة غنية ومميزة, يحتوي على مستخلص فطر الجانوديرما, يعزز الطاقة والحيوية"},
-            {"Product Code": "FB002", "name": "قهوة لينجزي 3 في 1", "category": "أغذية ومشروبات", "PV": 10.0, "DP": 10.2, "benefits": "خالي من الألوان والنكهات الصناعية, يعزز النشاط والحيوية, يقوي الجهاز المناعي"},
-            {"Product Code": "FB005", "name": "عصير روسيل", "category": "أغذية ومشروبات", "PV": 12.0, "DP": 9.25, "benefits": "غني بفيتامين C ومضادات الأكسدة, يدعم صحة القلب والدورة الدموية, يحسن الهضم"},
-            {"Product Code": "FB007", "name": "مورينزي", "category": "أغذية ومشروبات", "PV": 17.0, "DP": 13.25, "benefits": "يوازن درجة الحموضة بالجسم, يساعد على إزالة السموم, ينشط الدورة الدموية, يحسن الهضم"},
-            {"Product Code": "FB025", "name": "كوكوزي", "category": "أغذية ومشروبات", "PV": 13.0, "DP": 13.6, "benefits": "يعزز الطاقة والتركيز, يدعم صحة القلب, يساعد في نمو الدماغ عند الأطفال"},
-            {"Product Code": "FB032", "name": "سيريال سبيرولينا", "category": "أغذية ومشروبات", "PV": 30.0, "DP": 28.0, "benefits": "غني بالبروتين والفيتامينات والمعادن, يعزز المناعة, يساعد في تنظيم الوزن"},
-            {"Product Code": "HF029", "name": "أقراص عرف الأسد", "category": "المكملات الغذائية الصحية", "PV": 26.0, "DP": 24.1, "benefits": "دعم صحة الدماغ والجهاز العصبي, تحسين الذاكرة والتركيز, دعم الجهاز الهضمي"},
-            {"Product Code": "HF030", "name": "أقراص كورديسيبس", "category": "المكملات الغذائية الصحية", "PV": 60.0, "DP": 54.95, "benefits": "زيادة الطاقة والأداء الرياضي, دعم صحة الجهاز التنفسي, دعم وظائف الكلى والكبد"},
-            {"Product Code": "HF031", "name": "أقراص سبيرولينا (120)", "category": "المكملات الغذائية الصحية", "PV": 20.0, "DP": 16.35, "benefits": "غذاء متكامل (بروتين, فيتامينات, معادن), مضاد للأكسدة, دعم صحة الدم والقلب"},
-            {"Product Code": "HF038", "name": "أقراص سبيرولينا (500)", "category": "المكملات الغذائية الصحية", "PV": 70.0, "DP": 56.85, "benefits": "غذاء متكامل (بروتين, فيتامينات, معادن), مضاد للأكسدة, دعم صحة الدم والقلب"},
-            {"Product Code": "HF039", "name": "مايكوفيجي", "category": "المكملات الغذائية الصحية", "PV": 70.0, "DP": 51.65, "benefits": "تنظيف الجهاز الهضمي والقولون, إدارة الوزن, إزالة السموم من الجسم, مصدر غني بالألياف"},
-            {"Product Code": "HF041", "name": "مسحوق فطر الريشي", "category": "المكملات الغذائية الصحية", "PV": 70.0, "DP": 53.7, "benefits": "دعم وتقوية جهاز المناعة, التخفيف من التوتر وتحسين النوم, إزالة السموم ودعم صحة الكبد"},
-            {"Product Code": "PC004", "name": "شامبو جانوزي", "category": "العناية الشخصية", "PV": 11.0, "DP": 7.8, "benefits": "ينظف الشعر بلطف ويغذيه بفضل خلاصة الجانوديرما وفيتامين B5"},
-            {"Product Code": "PC006", "name": "معجون أسنان جانوزي", "category": "العناية الشخصية", "PV": 6.0, "DP": 5.85, "benefits": "طبيعي بخلاصة الجانوديرما، بدون فلورايد. ينظف الأسنان واللثة"},
-            {"Product Code": "PC036", "name": "صابون جانوزي", "category": "العناية الشخصية", "PV": 3.0, "DP": 2.7, "benefits": "ينظف البشرة بلطف ويحافظ على رطوبتها"},
-            {"Product Code": "SC014", "name": "كريم شجرة الشاي", "category": "العناية بالبشرة ومستحضرات التجميل", "PV": 6.0, "DP": 5.85, "benefits": "مهدئ ومطهر للبشرة بفضل زيت شجرة الشاي"}
+            {"name": "قهوة لينجزي 3 في 1", "benefits": "يعزز النشاط والحيوية, يقوي الجهاز المناعي"},
+            {"name": "معجون أسنان جانوزي", "benefits": "طبيعي بخلاصة الجانوديرما، بدون فلورايد. ينظف الأسنان واللثة"},
+            {"name": "أقراص عرف الأسد", "benefits": "دعم صحة الدماغ والجهاز العصبي, تحسين الذاكرة والتركيز"}
         ];
         
-        const productDataString = JSON.stringify(productData);
+        const faqData = {
+            "هل منتجات دكسن غالية؟": "هاد أكتر سؤال بسمعه، وجوابه بعتمد على كيف بنشوف الموضوع. إذا قارنا سعر علبة قهوة دكسن بسعر علبة قهوة تجارية عادية، يمكن تحسي إنه سعر دكسن أعلى شوي. بس هاي المقارنة مش عادلة أبداً! إنتي ما بتشتري بس قهوة، إنتي بتشتري قهوة + صحة + نقاط بترجعلك مصاري. لما تحسبي القيمة الحقيقية للمنتج (فوائده الصحية وحجمه) رح تكتشفي إنه سعره منطقي جداً، وأحياناً أوفر من المنتج التجاري.",
+            "هل أنا مجبورة أبيع المنتجات؟": "جواب قاطع: لأ! إنتي أبداً مش مجبورة. في كتير عضوات معنا كل هدفهم هو إنهم يكونوا \"مستهلكات حكيمات\". همه بس بدهم يشتروا منتجات صحية لبيتهم بسعر الخصم، ويستفيدوا من العمولات اللي بترجعلهم من مشترياتهم الشخصية. فكرة المشروع بتبلش من هون. أما فكرة البيع وبناء الفريق، هاي خطوة بتيجي بعدين \"إذا إنتي حبيتي\".",
+            "هل هاد الشغل تسويق شبكي؟": "أنا بفهم خوفك تماماً. بس مهم نفرق بين \"التسويق الشبكي الحقيقي\" و \"التسويق الهرمي\" المحرم والممنوع. التسويق الهرمي هو نصب، لأنه ما بكون فيه منتج حقيقي. أما التسويق الشبكي الحقيقي (زي دكسن)، فهو خطة تسويق ذكية. الشركة بتبيع منتجات حقيقية إلها قيمة، وبدل ما تدفع ملايين على الإعلانات، بتدفع هاي المصاري إلنا إحنا كعمولات، لأننا بنعمل دعاية للمنتج عن طريق تجربتنا الشخصية.",
+            "ما عندي معارف كتير، كيف أنجح؟": "النجاح بدكسن ما بعتمد على \"كم حدا بتعرفي\"، بعتمد على \"كيف بتشتغلي\". اليوم، العالم كله صار قرية صغيرة بسبب الإنترنت. أنا رح أعلمك كيف تستخدمي الواتساب والفيسبوك بطريقة ذكية عشان توصلي لناس جداد مهتمين بالصحة أو بفرصة العمل، بدون ما تضطري تحكي مع قرايبك أو معارفك إذا ما كنتي حابة.",
+            "أنا ما بعرف أحكي وأقنع الناس!": "وأنا كمان ما بحب أضغط على حدا! أحلى إشي بشغلنا هو إنه ما بعتمد على \"الإقناع\"، بعتمد على \"المشاركة الصادقة\". لما تستخدمي منتج وتحسي بفايدته وتحكي لجارتك عن تجربتك، هاد مش إقناع، هاي مشاركة ونصيحة من القلب. الناس بتثق بالقصص الحقيقية أكتر من أي كلام منمق."
+        };
 
         const sendMessage = async () => {
             const userText = userInput.value.trim();
             if (userText === "") return;
 
-            // Check for API Key before sending
             if (apiKey === "الرجاء-وضع-مفتاح-API-الخاص-بك-هنا" || apiKey === "") {
                 appendMessage(userText, 'user');
                 userInput.value = "";
@@ -150,10 +142,10 @@
             showTypingIndicator();
 
             const prompt = `
-                أنتِ "هناده"، خبيرة بمنتجات DXN في الأردن. مهمتك هي الإجابة على أسئلة المستخدمين بلهجة أردنية ودودة ومبسطة. استخدمي المعلومات التالية عن المنتجات للإجابة بدقة. إذا سأل المستخدم عن منتج غير موجود، أو عن موضوع خارج نطاق دكسن، اعتذري بلطف وقولي أن معلوماتك تقتصر على منتجات دكسن.
+                أنتِ "هناده"، خبيرة بمنتجات DXN في الأردن. مهمتك هي الإجابة على أسئلة المستخدمين بلهجة أردنية ودودة ومبسطة. استخدمي المعلومات التالية للإجابة بدقة.
                 
-                معلومات المنتجات:
-                ${productDataString}
+                معلومات المنتجات: ${JSON.stringify(productData)}
+                معلومات الأسئلة الشائعة: ${JSON.stringify(faqData)}
 
                 سؤال المستخدم: "${userText}"
             `;
@@ -171,30 +163,15 @@
 
         const callGemini = async (prompt) => {
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-            
-            const payload = {
-                contents: [{
-                    parts: [{ text: prompt }]
-                }]
-            };
-
+            const payload = { contents: [{ parts: [{ text: prompt }] }] };
             const response = await fetch(apiUrl, {
                 method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify(payload)
             });
-
-            if (!response.ok) {
-                throw new Error(`API call failed with status: ${response.status}`);
-            }
-
+            if (!response.ok) throw new Error(`API call failed with status: ${response.status}`);
             const result = await response.json();
-             if (result.candidates && result.candidates.length > 0 &&
-                result.candidates[0].content && result.candidates[0].content.parts &&
-                result.candidates[0].content.parts.length > 0) {
+            if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts) {
                 return result.candidates[0].content.parts[0].text;
             } else {
                 return "عفواً، لم أتمكن من فهم طلبك. هل يمكنكِ إعادة صياغة السؤال؟";
@@ -204,11 +181,9 @@
         const appendMessage = (text, sender) => {
             const messageDiv = document.createElement('div');
             messageDiv.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
-            
             const bubble = document.createElement('div');
             bubble.className = `p-4 max-w-lg ${sender === 'user' ? 'chat-bubble-user' : 'chat-bubble-ai'}`;
-            bubble.innerHTML = `<p>${text}</p>`;
-
+            bubble.innerHTML = `<p>${text.replace(/\n/g, '<br>')}</p>`;
             messageDiv.appendChild(bubble);
             chatWindow.appendChild(messageDiv);
             chatWindow.scrollTop = chatWindow.scrollHeight;
@@ -218,33 +193,18 @@
             const typingDiv = document.createElement('div');
             typingDiv.id = 'typing-indicator';
             typingDiv.className = 'flex justify-start';
-            typingDiv.innerHTML = `
-                <div class="chat-bubble-ai p-4 max-w-lg">
-                    <div class="flex items-center space-x-1 space-x-reverse">
-                        <div class="w-2 h-2 bg-gray-500 rounded-full animate-pulse"></div>
-                        <div class="w-2 h-2 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
-                        <div class="w-2 h-2 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
-                    </div>
-                </div>
-            `;
+            typingDiv.innerHTML = `<div class="chat-bubble-ai p-4 max-w-lg"><div class="flex items-center space-x-1 space-x-reverse"><div class="w-2 h-2 bg-gray-500 rounded-full animate-pulse"></div><div class="w-2 h-2 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div><div class="w-2 h-2 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div></div></div>`;
             chatWindow.appendChild(typingDiv);
             chatWindow.scrollTop = chatWindow.scrollHeight;
         };
 
         const removeTypingIndicator = () => {
             const indicator = document.getElementById('typing-indicator');
-            if (indicator) {
-                indicator.remove();
-            }
+            if (indicator) indicator.remove();
         };
 
         sendBtn.addEventListener('click', sendMessage);
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-
+        userInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
         exampleBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 userInput.value = btn.textContent;
